@@ -1,0 +1,37 @@
+<form method="get" class="filter-panel" id="filters" aria-labelledby="filters-title">
+  <input type="hidden" name="aplicar" value="1">
+  <div class="filter-top">
+    <div class="filter-title">{% include 'dashboard/_icon.html' with name='filter' %}<div><strong id="filters-title">{% if page == 'overview' %}Filtros da Visão Geral{% else %}Refinar análise{% endif %}</strong><span>Combine os filtros para refinar os resultados.</span></div></div>
+    <a href="?limpar=1">Limpar filtros</a>
+  </div>
+  <div class="filter-grid">
+    {% for filter in primary_filters %}
+    <label>{{ filter.label }}
+      <select name="{{ filter.key }}" {% if page == 'paraiba' and filter.key == 'uf' %}disabled{% endif %}>
+        <option value="">Todos</option>
+        {% for value in filter.values %}<option value="{{ value }}" {% if value == filter.selected %}selected{% endif %}>{{ value }}</option>{% endfor %}
+      </select>
+    </label>
+    {% endfor %}
+    <label>Data inicial<input type="date" name="inicio" value="{{ params.inicio }}"></label>
+    <label>Data final<input type="date" name="fim" value="{{ params.fim }}"></label>
+    <button class="button primary" type="submit">Aplicar filtros</button>
+  </div>
+  {% if active_filters %}<div class="active-filters" aria-label="Filtros aplicados">{% for filter in active_filters %}<span><strong>{{ filter.label }}:</strong> {{ filter.value }}</span>{% endfor %}</div>{% endif %}
+  <details>
+    <summary>Mais filtros</summary>
+    <div class="filter-grid advanced">
+      {% for filter in advanced_filters %}
+      <label>{{ filter.label }}
+        <select name="{{ filter.key }}">
+          <option value="">Todos</option>
+          {% for value in filter.values %}<option value="{{ value }}" {% if value == filter.selected %}selected{% endif %}>{{ value }}</option>{% endfor %}
+        </select>
+      </label>
+      {% endfor %}
+      <label>Hora inicial<input type="number" min="0" max="23" name="hora_inicio" value="{{ params.hora_inicio }}"></label>
+      <label>Hora final<input type="number" min="0" max="23" name="hora_fim" value="{{ params.hora_fim }}"></label>
+      <label>Pesquisar ID, município ou BR<input name="q" value="{{ params.q }}" placeholder="Ex.: JOAO PESSOA"></label>
+    </div>
+  </details>
+</form>

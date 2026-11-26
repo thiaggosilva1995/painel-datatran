@@ -1,0 +1,57 @@
+{% load l10n %}
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Painel de Análise de Segurança Pública – VDE 2025</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style> .plotly-graph-div {width:100%} select:focus,button:focus,a:focus {outline:3px solid #60a5fa;outline-offset:3px} </style>
+</head>
+<body class="bg-slate-100 text-slate-700 antialiased">
+  <header class="bg-slate-900 text-white border-b-4 border-blue-500">
+    <div class="max-w-screen-2xl mx-auto px-4 sm:px-8 py-8">
+      <p class="text-blue-300 text-xs font-bold tracking-widest uppercase mb-3">Observatório de indicadores · VDE / 2025</p>
+      <h1 class="text-2xl sm:text-3xl font-bold">Painel de Análise de Segurança Pública – VDE 2025</h1>
+      <p class="text-slate-300 mt-3 text-sm">Visão consolidada de eventos, evolução mensal e perfil das vítimas.</p>
+    </div>
+  </header>
+  <main class="max-w-screen-2xl mx-auto p-4 sm:p-8 space-y-6">
+    <form method="get" class="bg-white border border-slate-200 rounded-xl p-5 flex flex-wrap items-end gap-4 shadow-sm">
+      <div class="flex-1 min-w-0 w-full sm:min-w-64">
+        <label for="evento" class="block font-semibold text-sm mb-2">Filtrar por evento</label>
+        <select id="evento" name="evento" class="border border-slate-300 rounded-lg p-3 w-full bg-white">
+          <option value="">Todos os Eventos</option>
+          {% for evento in eventos %}<option value="{{ evento }}" {% if evento == evento_selecionado %}selected{% endif %}>{{ evento }}</option>{% endfor %}
+        </select>
+      </div>
+      <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white rounded-lg px-6 py-3 font-semibold">Aplicar filtro</button>
+      <a href="{% url 'dashboard:index' %}" class="text-blue-700 px-3 py-3">Limpar</a>
+    </form>
+    <p class="text-sm">Recorte: <strong>{{ evento_selecionado|default:'Todos os Eventos' }}</strong> · {{ registros|floatformat:'0g' }} registros. Todos os indicadores acompanham o filtro.</p>
+    {% if sem_dados %}<p role="status" class="bg-amber-50 border border-amber-200 p-4 rounded-lg">Nenhum registro encontrado para o evento informado.</p>{% endif %}
+    <section aria-label="Indicadores principais" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
+      {% for kpi in kpis %}<article class="bg-white rounded-xl p-6 border border-slate-200 border-t-4 border-t-blue-600 shadow-sm">
+        <h2 class="text-sm font-semibold text-slate-500 min-h-10">{{ kpi.titulo }}</h2>
+        <p class="text-3xl font-bold text-slate-900 mt-2">{{ kpi.valor|floatformat:'0g' }}</p>
+      </article>{% endfor %}
+    </section>
+    <p class="text-xs text-slate-500">CVLI: soma de homicídio doloso, lesão corporal seguida de morte e roubo seguido de morte (latrocínio). Feminicídio não é somado separadamente, para evitar sobreposição. Quantidade utiliza “total” quando preenchido; caso contrário, “total_vitima”. O Total Geral soma indicadores de naturezas diferentes e não representa pessoas únicas. Pesos de apreensões (total_peso) não são somados às contagens. A pizza considera apenas feminino e masculino; valores não informados estão na tabela.</p>
+    <section aria-label="Gráficos" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      {% for titulo, grafico in graficos %}<article class="bg-white border border-slate-200 rounded-xl shadow-sm p-4 sm:p-5 min-w-0 overflow-hidden">
+        <h2 class="font-semibold text-slate-900 border-b border-slate-100 pb-4 mb-3">{{ titulo }}</h2>
+        {{ grafico|safe }}
+      </article>{% endfor %}
+    </section>
+    <section class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+      <h2 class="text-lg font-semibold text-slate-900 p-5">Tabela-resumo por evento</h2>
+      <div class="overflow-x-auto"><table class="w-full text-sm text-right">
+        <caption class="sr-only">Totais por evento no recorte selecionado</caption>
+        <thead class="bg-slate-50 text-slate-500"><tr><th scope="col" class="p-4 text-left">Evento</th><th scope="col" class="p-4">Total</th><th scope="col" class="p-4">Feminino</th><th scope="col" class="p-4">Masculino</th><th scope="col" class="p-4">Não informado</th></tr></thead>
+        <tbody>{% for linha in resumo %}<tr class="border-t border-slate-100 hover:bg-blue-50"><th scope="row" class="p-4 text-left font-medium">{{ linha.evento }}</th><td class="p-4 font-semibold">{{ linha.quantidade|floatformat:'0g' }}</td><td class="p-4">{{ linha.feminino|floatformat:'0g' }}</td><td class="p-4">{{ linha.masculino|floatformat:'0g' }}</td><td class="p-4">{{ linha.nao_informado|floatformat:'0g' }}</td></tr>{% empty %}<tr><td colspan="5" class="p-6 text-center">Sem dados para este filtro.</td></tr>{% endfor %}</tbody>
+      </table></div>
+    </section>
+    <footer class="text-xs text-slate-500 pb-4">Fonte: BancoVDE 2025.xlsx · Gráficos interativos: passe o cursor para explorar os valores.</footer>
+  </main>
+</body>
+</html>

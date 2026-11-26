@@ -1,0 +1,6 @@
+Malha simplificada de estados brasileiros, fornecida pela API de Malhas do IBGE.
+Obtida em 23/11/2026, qualidade mínima, divisão por UF.
+https://servicodados.ibge.gov.br/api/v3/malhas/paises/BR?formato=application/vnd.geo%2Bjson&qualidade=minima&intrarregiao=UF
+
+Usada como referência territorial offline, sem informações de ruas ou rodovias.
+Pontos de sinistros continuam provenientes do DATATRAN e respeitam os filtros.

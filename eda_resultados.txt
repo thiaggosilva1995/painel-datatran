@@ -1,0 +1,141 @@
+COLUNAS REAIS: ['uf', 'municipio', 'evento', 'data_referencia', 'agente', 'arma', 'faixa_etaria', 'feminino', 'masculino', 'nao_informado', 'total_vitima', 'total', 'total_peso', 'abrangencia']
+
+DIMENSÕES (linhas, colunas tratadas): (832293, 15)
+
+TIPOS:
+ uf                         string
+municipio                  string
+evento                     string
+data_referencia    datetime64[us]
+agente                        str
+arma                          str
+faixa_etaria                  str
+feminino                  float64
+masculino                 float64
+nao_informado             float64
+total_vitima              float64
+total                     float64
+total_peso                float64
+abrangencia                string
+quantidade                float64
+
+NULOS ANTES DO TRATAMENTO:
+ {'uf': 0, 'municipio': 0, 'evento': 0, 'data_referencia': 0, 'agente': 826461, 'arma': 826461, 'faixa_etaria': 830349, 'feminino': 154606, 'masculino': 154157, 'nao_informado': 154921, 'total_vitima': 147084, 'total': 690217, 'total_peso': 831105, 'abrangencia': 0}
+
+NULOS APÓS TRATAMENTO:
+ uf                      0
+municipio               0
+evento                  0
+data_referencia         0
+agente             826461
+arma               826461
+faixa_etaria       830349
+feminino                0
+masculino               0
+nao_informado           0
+total_vitima            0
+total                   0
+total_peso              0
+abrangencia             0
+quantidade              0
+
+5 PRIMEIRAS LINHAS:
+ uf  municipio      evento data_referencia agente arma faixa_etaria  feminino  masculino  nao_informado  total_vitima  total  total_peso abrangencia  quantidade
+AC ACRELÂNDIA Feminicídio      2025-01-01    NaN  NaN          NaN       0.0        0.0            0.0           0.0    0.0         0.0    Estadual         0.0
+AC ACRELÂNDIA Feminicídio      2025-02-01    NaN  NaN          NaN       0.0        0.0            0.0           0.0    0.0         0.0    Estadual         0.0
+AC ACRELÂNDIA Feminicídio      2025-03-01    NaN  NaN          NaN       0.0        0.0            0.0           0.0    0.0         0.0    Estadual         0.0
+AC ACRELÂNDIA Feminicídio      2025-04-01    NaN  NaN          NaN       0.0        0.0            0.0           0.0    0.0         0.0    Estadual         0.0
+AC ACRELÂNDIA Feminicídio      2025-05-01    NaN  NaN          NaN       0.0        0.0            0.0           0.0    0.0         0.0    Estadual         0.0
+
+TOTAL POR EVENTO (decrescente):
+                                                             evento  quantidade
+                                     Emissão de Alvarás de licença   1770049.0
+                                        Atendimento pré-hospitalar   1054625.0
+                                           Realização de vistorias    760400.0
+                                                Busca e salvamento    523603.0
+                                               Combate a incêndios    348520.0
+                                        Mandado de prisão cumprido    297651.0
+                                                 Tráfico de drogas    219763.0
+                                                  Furto de veículo    201926.0
+                                           Arma de Fogo Apreendida    110360.0
+                                                  Roubo de veículo    104534.0
+                                               Pessoa Desaparecida     85066.0
+                                             Estupro de vulnerável     63690.0
+                                                 Pessoa Localizada     57672.0
+                                            Tentativa de homicídio     33881.0
+                                                  Homicídio doloso     31518.0
+Morte no trânsito ou em decorrência dele (exceto homicídio doloso)     25074.0
+                                                           Estupro     19909.0
+                                                          Suicídio     16592.0
+                        Mortes a esclarecer (sem indício de crime)     13537.0
+                                                    Roubo de carga      8565.0
+                         Morte por intervenção de Agente do Estado      6601.0
+                                                Mortes no trânsito      6056.0
+                                          Tentativa de feminicídio      4188.0
+                                                       Feminicídio      1578.0
+                               Roubo seguido de morte (latrocínio)       803.0
+                                   Lesão corporal seguida de morte       644.0
+                                         Morte de Agente do Estado       192.0
+                                      Suicídio de Agente do Estado       138.0
+                                    Roubo a instituição financeira        60.0
+                                              Apreensão de Maconha         0.0
+                                              Apreensão de Cocaína         0.0
+
+TOP 3:
+                        evento  quantidade
+Emissão de Alvarás de licença   1770049.0
+   Atendimento pré-hospitalar   1054625.0
+      Realização de vistorias    760400.0
+
+EVOLUÇÃO MENSAL — CVLI, TRÂNSITO E MANDADOS:
+ evento        CVLI  Mandados de Prisão Cumpridos  Trânsito
+mes                                                       
+2025-01-01  3192.0                       22366.0    2293.0
+2025-02-01  2688.0                       24753.0    2215.0
+2025-03-01  2965.0                       25868.0    2511.0
+2025-04-01  2627.0                       25490.0    2350.0
+2025-05-01  2794.0                       26077.0    2858.0
+2025-06-01  2597.0                       24687.0    2591.0
+2025-07-01  2602.0                       26263.0    2769.0
+2025-08-01  2783.0                       25920.0    2849.0
+2025-09-01  2671.0                       25869.0    2642.0
+2025-10-01  2666.0                       25204.0    2562.0
+2025-11-01  2571.0                       22919.0    2656.0
+2025-12-01  2809.0                       22235.0    2834.0
+
+FEMININO X MASCULINO POR EVENTO:
+                                                             evento  feminino  masculino  feminino_pct  masculino_pct
+                                     Emissão de Alvarás de licença       0.0        0.0          0.00           0.00
+                                        Atendimento pré-hospitalar       0.0        0.0          0.00           0.00
+                                           Realização de vistorias       0.0        0.0          0.00           0.00
+                                                Busca e salvamento       0.0        0.0          0.00           0.00
+                                               Combate a incêndios       0.0        0.0          0.00           0.00
+                                        Mandado de prisão cumprido       0.0        0.0          0.00           0.00
+                                                 Tráfico de drogas       0.0        0.0          0.00           0.00
+                                                  Furto de veículo       0.0        0.0          0.00           0.00
+                                           Arma de Fogo Apreendida       0.0        0.0          0.00           0.00
+                                                  Roubo de veículo       0.0        0.0          0.00           0.00
+                                               Pessoa Desaparecida   30081.0    54334.0         35.63          64.37
+                                             Estupro de vulnerável   53732.0     9043.0         85.59          14.41
+                                                 Pessoa Localizada   20745.0    34143.0         37.80          62.20
+                                            Tentativa de homicídio    4778.0    28320.0         14.44          85.56
+                                                  Homicídio doloso    2084.0    29056.0          6.69          93.31
+Morte no trânsito ou em decorrência dele (exceto homicídio doloso)    4817.0    19955.0         19.45          80.55
+                                                           Estupro   18251.0     1492.0         92.44           7.56
+                                                          Suicídio    3615.0    12917.0         21.87          78.13
+                        Mortes a esclarecer (sem indício de crime)    3213.0     9695.0         24.89          75.11
+                                                    Roubo de carga       0.0        0.0          0.00           0.00
+                         Morte por intervenção de Agente do Estado      45.0     6433.0          0.69          99.31
+                                                Mortes no trânsito    1067.0     4964.0         17.69          82.31
+                                          Tentativa de feminicídio    4140.0       45.0         98.92           1.08
+                                                       Feminicídio    1566.0        8.0         99.49           0.51
+                               Roubo seguido de morte (latrocínio)      83.0      714.0         10.41          89.59
+                                   Lesão corporal seguida de morte      54.0      588.0          8.41          91.59
+                                         Morte de Agente do Estado       7.0      185.0          3.65          96.35
+                                      Suicídio de Agente do Estado       7.0      124.0          5.34          94.66
+                                    Roubo a instituição financeira       0.0        0.0          0.00           0.00
+                                              Apreensão de Maconha       0.0        0.0          0.00           0.00
+                                              Apreensão de Cocaína       0.0        0.0          0.00           0.00
+
+Percentuais calculados sobre feminino + masculino; não informado fica fora do denominador.
+Quantidade: total, quando preenchido; caso contrário, total_vitima. Total geral mistura unidades e não representa vítimas únicas.
